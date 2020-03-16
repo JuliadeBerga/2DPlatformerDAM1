@@ -7,6 +7,10 @@ public class PlayerController : MonoBehaviour
     public float speedX;
     public float jumpSpeedY;
 
+    public GameObject leftBullet, rightBullet;
+
+    Transform firePos;
+
     bool facingRight, Jumping;
     float speed;
 
@@ -19,6 +23,8 @@ public class PlayerController : MonoBehaviour
         Jumping = false;
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        firePos = transform.Find("firePos");
     }
 
     // Update is called once per frame
@@ -66,6 +72,11 @@ public class PlayerController : MonoBehaviour
                 anim.SetInteger("Status", 2);
             }
 
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Fire();
         }
 
     }
@@ -119,6 +130,20 @@ public class PlayerController : MonoBehaviour
             transform.localScale = temp;
 
         }
+    }
+
+    void Fire()
+    {
+        if (!facingRight)
+        {
+            Instantiate(rightBullet, firePos.position, Quaternion.identity);
+        }
+
+        if (facingRight)
+        {
+            Instantiate(leftBullet, firePos.position, Quaternion.identity);
+        }
+
     }
 
    
