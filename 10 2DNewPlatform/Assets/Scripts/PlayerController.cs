@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Fire()
+    public void Fire()
     {
         if (!facingRight)
         {
@@ -146,7 +146,32 @@ public class PlayerController : MonoBehaviour
 
     }
 
-   
+    public void LeftWalk()
+    {
+        speed = -speedX;
+    }
+
+    public void Stop()
+    {
+        speed = 0;
+    }
+
+    public void RightWalk()
+    {
+        speed = speedX;
+    }
+
+    public void Jump() 
+    {
+        if (Jumping == false)
+        {
+            Jumping = true;
+            rb.AddForce(new Vector2(rb.velocity.x, jumpSpeedY));
+            anim.SetInteger("Status", 2);
+        }
+
+    }
+
 }
 
 
